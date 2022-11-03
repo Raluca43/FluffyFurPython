@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    Create a card for the adoption form
+{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Create a request for adoption</h3>
+                    </div>
+                    <div>
+                        {{ form.errors }}
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{% url 'pets_list' %}"  class="btn btn-outline-secondary mx-4">Cancel</a>
+                            {% if user.is_authenticated %}
+                            <button type="submit" class="btn btn-outline-primary mx-4">Send</button>
+                            {% else %} <h5>You are not logged </h5>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

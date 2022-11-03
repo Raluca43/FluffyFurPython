@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    Update the card for the adoption request
+{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Update the adoption request</h3>
+                    </div>
+                    <div>
+                        {{ form.errors }}
+                    </div>
+                    <form method="post" >
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-outline-secondary mx-4">Cancel</a>
+                            <button type="submit" class="btn btn-outline-primary mx-4">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

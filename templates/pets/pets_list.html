@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% if pets_list %}
+                {% for pet in pets_list %}
+                    <div class="col-3 mt-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="text-center">Updated info: {{ pet.date_time|date:"d-m-Y" }}</h6>
+                                <h4 class="text-center">{{ pet.announce_title }}</h4>
+                            </div>
+                            <div class="card-body">
+                                {% if pet.pet_image %}
+                                    <img class="card-img-top img-fluid"  src="{{ pet.pet_image.url }}" alt="" style="width: 23rem; height: 20rem;">
+                                {% else %}
+                                    <img class="card-img-top img-fluid" style="width: 23rem; height: 20rem;" src="{% static 'poza.jpg' %}" alt="">
+                                {% endif %}
+                                <br>
+                                <h6>{{ pet.animal_description|truncatechars:44}}<a class="nav-link" href="{% url 'pet_details' pet.id %}">see more</a></h6>
+                            </div>
+                            <div class="card-footer">
+                                <h6>{{ pet.animal_name }}, {{ pet.animal_age }}, {{ pet.gender }}</h6>
+                                <h6>{{ pet.city }}</h6>
+                                <a class="nav-link" href="{% url 'pet_details' pet.id %}">Details</a>
+                                {% if pet.poster == request.user %}
+                                    <a class="nav-link" href="{% url 'update_pet' pet.id %}">Update</a>
+                                    <a class="nav-link" href="{% url 'delete_pet' pet.id %}">Delete</a>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %} <h3 class="text-center">No data available</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+    Details
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mt-2">
+                <div class="card-text-center">
+                    <div class="card-header">
+                        <h5 class="card-title"> {{ adoptionrequest.name_of_the_apllicant }} </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> Phone number {{ adoptionrequest.phone_number_of_the_apllicant }} </p>
+                        <p class="card-text"> City {{ adoptionrequest.city_of_the_apllicant }} </p>
+                        <p class="card-text"> Description {{ adoptionrequest.description_of_the_apllicant }} </p>
+                        <p class="card-text"> Pet Type {{ adoptionrequest.pet_type }} </p>
+                        <a href="{% url 'pets_list' %}" class="btn btn-secondary">Back</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Last updated info: {{ adoptionrequest.date_time_of_the_apllicant|date:"d-m-Y" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

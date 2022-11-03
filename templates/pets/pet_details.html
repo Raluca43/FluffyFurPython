@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Details
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mt-2">
+                <div class="card-text-center">
+                    <div class="card-header">
+                        <h5 class="card-title"> {{ pets.announce_title }} </h5>
+                    </div>
+                    <div class="card-body">
+                        {% if pets.pet_image %}
+                            <img class="col-12" src="{{ pets.pet_image.url }}" alt="">
+                        {% else %}
+                            <img class="col-12" src="../static/poza.jpg" alt="">
+                        {% endif %}
+                        <p class="card-text"> Description {{ pets.animal_description }} </p>
+                        <p class="card-text"> City {{ pets.city }} </p>
+                        <p class="card-text"> Age {{ pets.animal_age }} </p>
+                        <p class="card-text">Phone number {{ pets.phone_number }} </p>
+                        <a href="{% url 'pets_list' %}" class="btn btn-secondary">Back</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Last updated info: {{ pets.date_time|date:"d-m-Y" }}
+
+                    </div>
+                <br>
+                    <div>
+                        <h3> Adoption formular</h3>
+                        <form method="post" action="{% url  'create_adoptionrequestperpet' %}">
+                            {% csrf_token %}
+                                                    <br>
+                        {{ adoptionrequestperpet.as_p }}
+{#                            <input type="hidden" name="pet_id" value="{{ pets.id }}">#}
+                       <div class="card-footer text-center">
+                            <a href="{% url 'pets_list' %}" class="btn btn-outline-secondary mx-4">Cancel</a>
+                            {% if user.is_authenticated %}
+                            <button type="submit" class="btn btn-outline-primary mx-4">Send</button>
+                                {% else %}  <a href="{% url 'login' %}" class="btn btn-outline-primary mx-4">Login so you can send the adoption request for this pet</a>
+                            {% endif %}
+                        </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

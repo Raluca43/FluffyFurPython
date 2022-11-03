@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    Create a card for the pet
+{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Create a new pet</h3>
+                    </div>
+                    <div>
+                        {{ form.errors }}
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{% url 'pets_list' %}" class="btn btn-outline-secondary mx-4">Cancel</a>
+                            {% if user.is_authenticated %}
+                            <button type="submit" class="btn btn-outline-primary mx-4">Save</button>
+                                {% else %}  <a href="{% url 'login' %}" class="btn btn-outline-primary mx-4">Login so you can add a pet</a>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

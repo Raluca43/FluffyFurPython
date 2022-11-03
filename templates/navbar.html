@@ -1,0 +1,63 @@
+<div>
+    <br>
+
+    <div class="row row-center">
+
+        <div class="col col-md-3 ">Welcome to pets adoption platform</div>
+        <div class="col col-md-1.5">
+            <a class="nav-link" href="{% url 'create_pets' %}">Add a pet</a></div>
+        <div class="col col-md-3.5">
+            <a class="nav-link active" aria-current="page" href="{% url 'create_adoptionrequest' %}"> Add an adoption
+                request</a>
+        </div>
+        <div class="col col-md-4 ">
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'create_new_account' %}" role="button">Register</a>
+                <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <br>
+</div>
+<br>
+<br>
+<nav class="navbar navbar-expand-lg black">
+    <div class="col-md-1"></div>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../static/vecteezy_dog-and-cat-paw-prints-collection-paw-icon-set-black-icon_5689667.jpg" alt=""
+                 width="40" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+
+                <form action="{% url 'pets_list' %}">
+                    <button name="dog" class="btn btn-primary" type="submit"> Dogs</button>
+                </form>
+                <form action="{% url 'pets_list' %}">
+                    <button name="cat" class="btn btn-primary" type="submit"> Cats</button>
+                </form>
+                <form action="{% url 'pets_list' %}">
+                    <button name="other" class="btn btn-primary" type="submit"> Other pets</button>
+                </form>
+
+                <a class="btn btn-primary" href="{% url 'list_of_adoptionsrequests' %}">Adoption requests</a>
+                <a class="btn btn-primary" href="{% url 'want_to_help' %}">Want to help?</a>
+                <form class="d-flex" method="POST", action="{% url 'search' %}">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" placeholder="search" aria-label="Search" name="searched">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+<br>
+<br>

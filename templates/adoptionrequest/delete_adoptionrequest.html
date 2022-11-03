@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+
+
+    Delete {{ adoptionrequest.name_of_the_apllicant}} {{ adoptionrequest.city_of_the_apllicant }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 align-items-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Do you want to delete the request {{ adoptionrequest.name_of_the_apllicant}} {{ adoptionrequest.city_of_the_apllicant }}?</h4>
+                    </div>
+                    <div class="card-footer text-center">
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger">Yes</button>
+                            <a href="{% url 'list_of_adoptionsrequests' %}" class="btn btn-outline-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

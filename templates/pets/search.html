@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+    {% if searched %}
+           <h4> you searched for {{ searched }}</h4>
+
+        {% for pets in city_pets %}
+             <div class="col-4 mt-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="text-center">Updated info: {{ pets.date_time|date:"d-m-Y" }}</h6>
+                                <h4 class="text-center">{{ pets.announce_title }}</h4>
+                            </div>
+                            <div class="card-body">
+                                {% if pets.pet_image %}
+                                    <img class="card-img-top img-fluid"  src="{{ pets.pet_image.url }}" alt="" style="width: 23rem; height: 20rem;">
+                                {% endif %}
+                                <br>
+                                <h6>{{ pets.animal_description|truncatechars:44}}<a class="nav-link" href="{% url 'pet_details' pets.id %}">see more</a></h6>
+                            </div>
+                            <div class="card-footer">
+                                <h5>{{ pets.animal_name }}, {{ pets.animal_age }}, {{ pets.gender }}</h5>
+                                <h6>{{ pets.city }}</h6>
+                                <a class="nav-link" href="{% url 'pet_details' pets.id %}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+        {% endfor %}
+                {% else %}
+        <h1> you didn't type the searched word</h1>
+    {% endif %}
+        </div>
+    </div>
+{% endblock %}
